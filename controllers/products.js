@@ -2,10 +2,12 @@ const productsRouter = require('express').Router();
 const Product = require('../models/productModel');
 const Category = require('../models/categoryModel');
 
+const productsService = require('../services/productsService')
+
 productsRouter.get('/', async (request, response) => {
   const products = await Product
     .find({})
-    .populate('category');
+    .populate('category', {name: 1});
 
   response.json(products);
 });
@@ -20,13 +22,8 @@ productsRouter.get('/:id', async (request, response) => {
 })
 
 productsRouter.post('/', async (request, response) => {
-  const body = request.body;
-
-  const product = new Product({
-    name: body.name,
-    category: body.category
-  });
-
-  const savedProduct = await product.save();
+  const savedProduct = await productsService.createProduct(request.body);
   response.json(savedProduct);
-})
+});
+
+module.exports = productsRouter;
