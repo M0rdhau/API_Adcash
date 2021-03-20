@@ -118,6 +118,21 @@ describe('updating the database', () => {
     const contents = productsFinally.map(p => p.name);
     expect(contents).not.toContain(productToDelete.name);
   });
+  test('Deleting a product deletes it from the relevant category\'s list', async () => {
+    const productsAtStart = await helper.productsInDB();
+    const productToDelete = productsAtStart[0];
+
+    await api
+      .delete(`/api/products/${productToDelete.id}`)
+      .expect(204);
+
+    const categories = await helper.categoriesInDB();
+    const productsInCategory = categories
+      .find(c => c.id.toString() === productToDelete.category.toString())
+      .products
+      .map(each => each.toString());
+    expect(productsInCategory).not.toContain(productToDelete.id.toString());
+  });
 });
 
 describe('Illegal requests', () => {

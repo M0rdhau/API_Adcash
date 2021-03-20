@@ -40,6 +40,12 @@ const createProduct = async (body) => {
 };
 
 const deleteProduct = async (id) => {
+  const product = await Product.findById(id);
+  const category = await Category.findById(product.category);
+  const newCat = {
+    products: category.products.filter(prod => prod.toString() !== id.toString())
+  };
+  await Category.findByIdAndUpdate(product.category, newCat, { new: true });
   await Product.findByIdAndRemove(id).exec();
 };
 
