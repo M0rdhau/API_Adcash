@@ -32,12 +32,26 @@ const initialProducts = [
   }
 ];
 
+const initialCategories = initialProducts
+  .map(p => p.category)
+  // remove non-unique categories from the list
+  .filter((p, ind, arr) => {
+    return arr.indexOf(p) === ind;
+  });
+
 const productsInDB = async () => {
   const products = await Product.find({});
   return products.map(p => p.toJSON());
 };
 
+const categoriesInDB = async () => {
+  const categories = await Category.find({});
+  return categories.map(p => p.toJSON());
+};
+
 module.exports = {
   initialProducts,
-  productsInDB
+  initialCategories,
+  productsInDB,
+  categoriesInDB
 };

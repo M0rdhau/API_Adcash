@@ -120,8 +120,6 @@ describe('updating the database', () => {
   });
 });
 
-
-
 describe('Illegal requests', () => {
   test('Product needs to have a name', async () => {
     const noNameProd = { category: 'fiddlesticks' };

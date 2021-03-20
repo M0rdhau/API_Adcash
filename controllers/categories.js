@@ -12,4 +12,14 @@ categoriesRouter.post('/', async (request, response) => {
   response.json(category);
 });
 
+categoriesRouter.put('/:id', async (request, response) => {
+  const updatedProduct = await categoriesService.updateCategory(request.body, request.params.id);
+  response.json(updatedProduct);
+});
+
+categoriesRouter.delete('/:id', async (request, response) => {
+  await categoriesService.deleteCategory(request.params.id);
+  return response.status(204).end();
+});
+
 module.exports = categoriesRouter;
