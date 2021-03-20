@@ -44,6 +44,11 @@ const productsInDB = async () => {
   return products.map(p => p.toJSON());
 };
 
+const productsInDBCategory = async (id) => {
+  const products = await Product.find({ category: id });
+  return products.map(p => p.toJSON());
+};
+
 const categoriesInDB = async () => {
   const categories = await Category.find({});
   return categories.map(p => p.toJSON());
@@ -53,5 +58,6 @@ module.exports = {
   initialProducts,
   initialCategories,
   productsInDB,
+  productsInDBCategory,
   categoriesInDB
 };

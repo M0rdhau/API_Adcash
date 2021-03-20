@@ -84,6 +84,11 @@ describe('Manipulating the database', () => {
 
     const contents = categoriesFinally.map(p => p.name);
     expect(contents).not.toContain(catToDelete.name);
+
+    const productsAfter = await helper.productsInDB();
+    const productCategories = productsAfter.map(p => p.category.toString());
+
+    expect(productCategories).not.toContain(catToDelete.id);
   });
 });
 

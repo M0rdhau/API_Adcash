@@ -1,4 +1,5 @@
 const Category = require('../models/categoryModel');
+const Product = require('../models/productModel');
 
 const getAllCategories = async () => {
   return Category
@@ -18,8 +19,25 @@ const createNewCategory = async (name) => {
   return category;
 };
 
+const updateCategory = async (body, id) => {
+  const updateCat = { name: body.name };
+  return Category.findByIdAndUpdate(id, updateCat, { new: true });
+};
+
+const deleteCategory = async (id) => {
+  const category = await Category.findById(id);
+  const productIds = category.products.map(e => e.toString());
+  for(let productId of productIds){
+    await Product.findByIdAndRemove(productId);
+    console.log('removed');
+  }
+  await Category.findByIdAndRemove(id).exec();
+};
+
 module.exports = {
   getAllCategories,
   getCategoryByName,
-  createNewCategory
+  createNewCategory,
+  updateCategory,
+  deleteCategory
 };
