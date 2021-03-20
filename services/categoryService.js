@@ -1,5 +1,15 @@
 const Category = require('../models/categoryModel');
 
+const getAllCategories = async () => {
+  return Category
+    .find({})
+    .populate('products', { name: 1 });
+};
+
+const getCategoryByName = async (name) => {
+  return await Category.findOne({ name }).exec();
+};
+
 const createNewCategory = async (name) => {
   const category = new Category({
     name
@@ -8,12 +18,8 @@ const createNewCategory = async (name) => {
   return category;
 };
 
-const getCategoryByName = async (name) => {
-  const category =  await Category.findOne({ name }).exec();
-  return category;
-};
-
 module.exports = {
-  createNewCategory,
-  getCategoryByName
+  getAllCategories,
+  getCategoryByName,
+  createNewCategory
 };

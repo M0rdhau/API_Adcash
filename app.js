@@ -3,6 +3,7 @@ const express = require('express');
 require('express-async-errors');
 const app = express();
 const productsRouter = require('./controllers/products');
+const categoriesRouter = require('./controllers/categories');
 const logger = require('./utils/logger');
 const middleware = require('./utils/middleware');
 const mongoose = require('mongoose');
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(middleware.requestLogger);
 
 app.use('/api/products', productsRouter);
+app.use('/api/categories', categoriesRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
