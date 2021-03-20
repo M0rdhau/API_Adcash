@@ -7,4 +7,9 @@ categoriesRouter.get('/', async (request, response) => {
   response.json(categories);
 });
 
+categoriesRouter.post('/', async (request, response) => {
+  const category  = await categoriesService.createNewCategory(request.body.name);
+  response.json(category);
+});
+
 module.exports = categoriesRouter;
