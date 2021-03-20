@@ -2,6 +2,16 @@ const productsRouter = require('express').Router();
 
 const productsService = require('../services/productsService');
 
+/***
+ * @swagger
+ * /api/products/:
+ *  get:
+ *    description: Get all products
+ *    responses:
+ *      200:
+ *        description: Success
+ *
+ */
 productsRouter.get('/', async (request, response) => {
   const products = await productsService.getAllProducts();
   response.json(products);

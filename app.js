@@ -8,6 +8,20 @@ const logger = require('./utils/logger');
 const middleware = require('./utils/middleware');
 const mongoose = require('mongoose');
 
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
+
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: 'Adcash API'
+    }
+  },
+  apis: ['./controllers/categories.js', './controllers/products.js']
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+
 logger.info('connecting to', config.MONGODB_URI);
 
 mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
@@ -23,6 +37,7 @@ app.use(middleware.requestLogger);
 
 app.use('/api/products', productsRouter);
 app.use('/api/categories', categoriesRouter);
+app.use('/api-documentation', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
