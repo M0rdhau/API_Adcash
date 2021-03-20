@@ -8,7 +8,7 @@ const getAllCategories = async () => {
 };
 
 const getCategoryByName = async (name) => {
-  return await Category.findOne({ name }).exec();
+  return await Category.findOne({ name });
 };
 
 const createNewCategory = async (name) => {
@@ -31,7 +31,7 @@ const deleteCategory = async (id) => {
     await Product.findByIdAndRemove(productId);
     console.log('removed');
   }
-  await Category.findByIdAndRemove(id).exec();
+  await Category.findByIdAndRemove(id);
 };
 
 module.exports = {

@@ -22,7 +22,7 @@ const getProductById = async (id) => {
 const createProduct = async (body) => {
   const name = body.name;
   const categoryName = body.category;
-  let category = await Category.findOne({ name: categoryName }).exec();
+  let category = await Category.findOne({ name: categoryName });
 
   if(!category){
     category = await categoryService.createNewCategory(categoryName);
@@ -46,7 +46,7 @@ const deleteProduct = async (id) => {
     products: category.products.filter(prod => prod.toString() !== id.toString())
   };
   await Category.findByIdAndUpdate(product.category, newCat, { new: true });
-  await Product.findByIdAndRemove(id).exec();
+  await Product.findByIdAndRemove(id);
 };
 
 const updateProduct = async (body, id) => {
@@ -56,7 +56,7 @@ const updateProduct = async (body, id) => {
   const name = body.name;
   const categoryName = body.category;
 
-  let newCategory = await Category.findOne({ name: categoryName }).exec();
+  let newCategory = await Category.findOne({ name: categoryName });
 
   if(categoryName !== categoryToUpdate.name){
 
