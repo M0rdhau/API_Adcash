@@ -11,15 +11,16 @@ First, to install all the dependencies, run
 npm install
 `
 
-Project also needs a working connection to a mongoDB database.\
-To run a mongoDB in docker, first download the working mongoDB image
+Project also needs a working connection to a mongoDB database.
+
+To run a mongoDB instance in a docker container, first download the working mongoDB image:\
 `sudo docker pull mongo:4.4`\
-After that, run\
+Then:\
 ```sudo docker run -d -p 27017-27019:27017-27019 --name mongoDB_New mongo:4.4```
 
 The above command will run the container in detached mode, i.e. in the background.
-We are also mapping the container ports with host ports so that we can access the database
-from this application.\
+This also maps the container ports to host ports so that the database can be accessed
+from the application.\
 The ports used were taken from the MongoDB documentation.
 
 ---
@@ -35,3 +36,7 @@ in `./coverage/lcov-report/index.html` file.
 
 * `npm run dev` - will run the application in 'developer' mode,
 instantly refreshing when changes are made in the editor.
+  
+---
+
+
