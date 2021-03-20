@@ -93,6 +93,18 @@ describe('Manipulating the database', () => {
 });
 
 describe('Illegal requests', () => {
+  test('Updating a category with wrong id results in an error', async () => {
+    await api
+      .put('/api/categories/V3ryWr0ng1D')
+      .expect(400);
+  });
+
+  test('Deleting a category with wrong id results in an error', async () => {
+    await api
+      .delete('/api/categories/V3ryWr0ng1D')
+      .expect(400);
+  });
+
   test('Category needs to have a name', async () => {
     const noNameCategory = {  };
     await api
