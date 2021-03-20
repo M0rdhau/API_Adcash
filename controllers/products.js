@@ -14,11 +14,7 @@ productsRouter.get('/category/:cat', async (request, response) => {
 
 productsRouter.get('/:id', async (request, response) => {
   const product = await productsService.getProductById(request.params.id);
-  if(product){
-    response.send(product);
-  }else{
-    response.status(404).end();
-  }
+  response.send(product);
 });
 
 productsRouter.post('/', async (request, response) => {

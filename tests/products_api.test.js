@@ -15,7 +15,7 @@ beforeEach(async () => {
   }
 });
 
-describe('getting products from database', () => {
+describe('getting values from database', () => {
   test('request returns correct amount of products', async () => {
     const response = await api.get('/api/products/');
     expect(response.body).toHaveLength(helper.initialProducts.length);
@@ -136,6 +136,30 @@ describe('updating the database', () => {
 });
 
 describe('Illegal requests', () => {
+  test('Getting Wrong category name returns a 404', async () => {
+    await api
+      .get('/api/products/category/nonExistingCategory')
+      .expect(404);
+  });
+
+  test('Getting Wrong product id returns a 404', async () => {
+    await api
+      .get('/api/products/V3ry84d1D')
+      .expect(400);
+  });
+
+  test('Deleting a wrong product id returns a 400', async () => {
+    await api
+      .delete('/api/products/V3ry84d1D')
+      .expect(400);
+  });
+
+  test('Updating wrong product id returns a 400', async () => {
+    await api
+      .put('/api/products/V3ry84d1D')
+      .expect(400);
+  });
+
   test('Product needs to have a name', async () => {
     const noNameProd = { category: 'fiddlesticks' };
     await api
