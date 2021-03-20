@@ -1,18 +1,19 @@
 const productsRouter = require('express').Router();
-const Product = require('../models/productModel');
 
-const productsService = require('../services/productsService')
+const productsService = require('../services/productsService');
 
 productsRouter.get('/', async (request, response) => {
-  const products = await Product
-    .find({})
-    .populate('category', {name: 1});
-
+  const products = await productsService.getAllProducts();
   response.json(products);
 });
 
+productsRouter.get('/category/:cat', async (request, response) => {
+  const productsByCategory = await productsService.getProductsByCategoryName(request.params.cat);
+  response.json(productsByCategory);
+});
+
 productsRouter.get('/:id', async (request, response) => {
-  const product = await Product.findById(request.params.id);
+  const product = await productsService.getProductById(request.params.id);
   if(product){
     response.send(product);
   }else{
@@ -33,6 +34,6 @@ productsRouter.put('/:id', async (request, response) => {
 productsRouter.delete('/:id', async (request, response) => {
   await productsService.deleteProduct(request.params.id);
   return response.status(204).end();
-})
+});
 
 module.exports = productsRouter;
