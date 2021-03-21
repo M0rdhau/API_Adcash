@@ -34,7 +34,7 @@ After that, there are several commands you can run:
 
 * `npm run test` - will run all tests from the `./tests/` folder.
 
-* `CI=true npm test -- --coverage` - will generate a basic test coverage report
+* `npm run coverage` - will generate a basic test coverage report
 in `./coverage/lcov-report/index.html` file.
 
 * `npm run dev` - will run the application in 'developer' mode,

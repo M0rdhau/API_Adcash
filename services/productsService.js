@@ -59,8 +59,7 @@ const updateProduct = async (body, id) => {
   let newCategory = await Category.findOne({ name: categoryName });
 
   if(categoryName !== categoryToUpdate.name){
-
-    categoryToUpdate.products = categoryToUpdate.products.filter(p => p.id !== id);
+    categoryToUpdate.products = categoryToUpdate.products.filter(p => p.toString() !== id.toString());
     await categoryToUpdate.save();
 
     if(!newCategory){

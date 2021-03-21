@@ -105,8 +105,50 @@ describe('updating the database', () => {
     expect(contents).not.toContain(oldName);
     expect(contents).toContain('newName');
   });
-  // TODO: check that on updating the category of an object,
-  //  object is removed from older category listing and added to new one
+  test('updating a product category removes it from earlier category' +
+    ' and adds it to new one', async () => {
+    const productsAtStart = await helper.productsInDB();
+    const productToUpdate = productsAtStart[0];
+    const newCategoryName = helper.initialProducts[helper.initialProducts.length - 1].category;
+    const productId = productToUpdate.id;
+    productToUpdate.category = newCategoryName;
+
+    await api
+      .put(`/api/products/${productId}`)
+      .send(productToUpdate)
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
+
+    const categories = await helper.categoriesInDB();
+    const nonUpdatedCategories = categories.filter(cat => cat.name !== newCategoryName);
+    const productsInNonUpdatedCategories = nonUpdatedCategories
+      .map(cat => cat.products)
+      .reduce((acc, val) => acc.concat(val), [])
+      .map(id => id.toString());
+    const updatedCategoryProductIds = categories
+      .find(cat => cat.name === newCategoryName)
+      .products.map(id => id.toString());
+    expect(updatedCategoryProductIds).toContain(productId.toString());
+    expect(productsInNonUpdatedCategories).not.toContain(productId.toString());
+  });
+
+  test('Updating a product with a non-existing category creates a new category', async () => {
+    const productsAtStart = await helper.productsInDB();
+    const productToUpdate = productsAtStart[0];
+    const newCategoryName = 'NonExistent CategoryName';
+    productToUpdate.category = newCategoryName;
+
+    await api
+      .put(`/api/products/${productToUpdate.id}`)
+      .send(productToUpdate)
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
+
+    const categories = await helper.categoriesInDB();
+    const categoryNames = categories.map(cat => cat.name);
+    expect(categoryNames).toContain(newCategoryName);
+  });
+
   test('a product can be deleted', async () => {
     const productsAtStart = await helper.productsInDB();
     const productToDelete = productsAtStart[0];

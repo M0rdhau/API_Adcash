@@ -17,7 +17,10 @@ beforeEach(async () => {
 
 describe('getting categories from database', () => {
   test('request returns correct amount of categories', async () => {
-    const response = await api.get('/api/categories/');
+    const response = await api
+      .get('/api/categories/')
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
     const categories = helper.initialCategories;
     expect(response.body).toHaveLength(categories.length);
 
