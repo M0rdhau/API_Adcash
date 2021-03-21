@@ -5,7 +5,7 @@ By Dachi Mshvidobadze
 ## Pre-Setup
 
 Make sure ports 3001(for the API) and 27017(for the database) are free.\
-This project also requires `docker` and `docker-compose`
+This project also requires [docker](https://docs.docker.com/engine/install/ubuntu/) and [docker-compose](https://docs.docker.com/compose/install/)
 
 ## Setting up the project
 
@@ -20,7 +20,8 @@ You can do so, by running the following command in the root direcotry of the pro
 
 `sudo docker-compose -f mongo-docker-compose.yaml up`
 
-This runs docker with mongoDB version 4.4, and maps port 27017 of the container to the host.\
+This runs docker with [mongoDB](https://www.mongodb.com/) version 4.4, and maps port 27017 of the container to the host.
+The port number is taken from mongo [documentation](https://docs.mongodb.com/manual/reference/default-mongodb-port/)\
 If everything runs successfully, then the database is pretty much ready.
 
 ## Running the project
