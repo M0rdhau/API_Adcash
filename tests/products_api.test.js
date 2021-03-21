@@ -105,6 +105,8 @@ describe('updating the database', () => {
     expect(contents).not.toContain(oldName);
     expect(contents).toContain('newName');
   });
+  // TODO: check that on updating the category of an object,
+  //  object is removed from older category listing and added to new one
   test('a product can be deleted', async () => {
     const productsAtStart = await helper.productsInDB();
     const productToDelete = productsAtStart[0];
