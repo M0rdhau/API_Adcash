@@ -180,6 +180,11 @@ describe('updating the database', () => {
 });
 
 describe('Illegal requests', () => {
+  test('Requesting from unknown path returns a 404', async () => {
+    await api
+      .get('/unknownEndPoint')
+      .expect(404);
+  });
   test('Getting Wrong category name returns a 404', async () => {
     await api
       .get('/api/products/category/nonExistingCategory')
