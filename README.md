@@ -27,19 +27,19 @@ If everything runs successfully, then the database is pretty much ready.
 
 After that, there are several commands you can run:
 
-* `npm start` - will run the application.
+* `npm start` - to run the application.
 
-* `npm run test` - will run all tests from the `./tests/` folder.
+* `npm run test` - to run all tests from the `./tests/` folder.
 
-* `npm run coverage` - will generate a basic test coverage report
+* `npm run coverage` - to generate a basic test coverage report
 in `./coverage/lcov-report/index.html` file.
 
-* `npm run dev` - will run the application in 'developer' mode,
+* `npm run dev` - to run the application in 'developer' mode,
 instantly refreshing when changes are made in the editor.
   
 ## Using the project
 
-After the project is launched, Swagger documentation will be available at 
+Along with the project, Swagger-UI will also launch.
 
 http://localhost:3001/api-documentation
 
