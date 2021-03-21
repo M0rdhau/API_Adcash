@@ -4,9 +4,10 @@ By Dachi Mshvidobadze
 
 ## Pre-Setup
 
-Make sure ports 3001(for the API) and 27017(for the database) are free
+Make sure ports 3001(for the API) and 27017(for the database) are free.\
+This project also requires `docker` and `docker-compose`
 
-## Setting it up
+## Setting up the project
 
 First, to install all the dependencies, run
 
@@ -14,19 +15,15 @@ First, to install all the dependencies, run
 npm install
 `
 
-Project also needs a working connection to a mongoDB database.
+Project also needs a working connection to a mongoDB database.\
+You can do so, by running the following command in the root direcotry of the project:
 
-To run a mongoDB instance in a docker container, first download the working mongoDB image:\
-`sudo docker pull mongo:4.4`\
-Then:\
-```sudo docker run -d -p 27017:27017 --name mongoDB_New mongo:4.4```
+`sudo docker-compose -f mongo-docker-compose.yaml up`
 
-The above command will run the container in detached mode, i.e. in the background.
-This also maps the container ports to host ports so that the database can be accessed
-from the application.\
-The port used are taken from the MongoDB documentation.
+This runs docker with mongoDB version 4.4, and maps port 27017 of the container to the host.\
+If everything runs successfully, then the database is pretty much ready.
 
-## Running it
+## Running the project
 
 After that, there are several commands you can run:
 
@@ -40,7 +37,7 @@ in `./coverage/lcov-report/index.html` file.
 * `npm run dev` - will run the application in 'developer' mode,
 instantly refreshing when changes are made in the editor.
   
-## Using it
+## Using the project
 
 After the project is launched, Swagger documentation will be available at 
 

@@ -8,7 +8,8 @@
     "test": "NODE_ENV=test jest --verbose --runInBand",
     "dev": "NODE_ENV=development nodemon index.js",
     "coverage": "NODE_ENV=test jest --verbose --runInBand \"--coverage\"",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "database": "docker-compose -f mongo-docker-compose.yaml up"
   },
   "author": "Dachi Mshvidobadze",
   "license": "ISC",
