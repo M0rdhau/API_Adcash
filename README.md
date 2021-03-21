@@ -5,11 +5,11 @@ By Dachi Mshvidobadze
 ## Pre-Setup
 
 Make sure ports 3001(for the API) and 27017(for the database) are free.\
-This project also requires [docker](https://docs.docker.com/engine/install/ubuntu/) and [docker-compose](https://docs.docker.com/compose/install/)
+This project also requires [docker](https://docs.docker.com/engine/install/ubuntu/) and [docker-compose](https://docs.docker.com/compose/install/).
 
 ## Setting up the project
 
-First, to install all the dependencies, run
+First, to install all the dependencies, run:
 
 `
 npm install
@@ -44,4 +44,4 @@ Along with the project, Swagger-UI will also launch.
 
 http://localhost:3001/api-documentation
 
-It includes all the endpoints and usage - as is customary for a documentation
+It includes all the endpoints and usage - as is customary for a documentation.
