@@ -29,7 +29,6 @@ const deleteCategory = async (id) => {
   const productIds = category.products.map(e => e.toString());
   for(let productId of productIds){
     await Product.findByIdAndRemove(productId);
-    console.log('removed');
   }
   await Category.findByIdAndRemove(id);
 };

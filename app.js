@@ -10,15 +10,7 @@ const mongoose = require('mongoose');
 
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
-
-const swaggerOptions = {
-  swaggerDefinition: {
-    info: {
-      title: 'Adcash API'
-    }
-  },
-  apis: ['./controllers/categories.js', './controllers/products.js']
-};
+const swaggerOptions = require('./swaggerOptions');
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
