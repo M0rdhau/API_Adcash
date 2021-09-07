@@ -1,6 +1,4 @@
-# API assignment - Adcash Backend Internship
-
-By Dachi Mshvidobadze
+# Sample API App
 
 ## Pre-Setup
 
